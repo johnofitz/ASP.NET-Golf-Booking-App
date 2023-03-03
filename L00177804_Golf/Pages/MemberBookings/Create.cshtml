@@ -5,10 +5,6 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Booking</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -24,21 +20,45 @@
                 <span asp-validation-for="Booking.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.BookingDateTime" class="control-label"></label>
-                <input asp-for="Booking.BookingDateTime" class="form-control" />
-                <span asp-validation-for="Booking.BookingDateTime" class="text-danger"></span>
+
+              @*  <label asp-for="Booking.BookingDateTime" class="control-label"></label>*@
+                <input type="text" id="timepicker">
+                <input type="text" id="datepicker">
             </div>
-            <div class="form-group">
+            <div class="form-group" style=" padding:15px">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
+
+@*<input type="text" id="timepicker">
+<input type="text" id="datepicker">*@
+
 <div>
     <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            $('#datepicker').datepicker({
+                showOptions: { speed: 'fast' },
+                changeMonth: false,
+                changeYear: false,
+                dateFormat: 'dd/mm/yy',
+                gotoCurrent: true
+            });
+            $('#timepicker').timepicker({
+                step: 15,
+                minTime: '07:00am', // set minimum time to 9am
+                maxTime: '07:00pm'   // set maximum time to 5pm
+            });
+        });
+    </script>
 }
