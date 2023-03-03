@@ -5,6 +5,10 @@
     ViewData["Title"] = "Create";
 }
 
+<h1>Create</h1>
+
+<h4>Booking</h4>
+<hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -20,31 +24,28 @@
                 <span asp-validation-for="Booking.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-
-              @*  <label asp-for="Booking.BookingDateTime" class="control-label"></label>*@
-                <input type="text" id="timepicker">
-                <input type="text" id="datepicker">
+                <label asp-for="Booking.BookingTimeOnly" class="control-label"></label>
+                <input type="text" id="timepicker" input asp-for="Booking.BookingTimeOnly" class="form-control" />
+                <span asp-validation-for="Booking.BookingTimeOnly" class="text-danger"></span>
             </div>
-            <div class="form-group" style=" padding:15px">
+            <div class="form-group">
+                <label asp-for="Booking.BookingDateOnly" class="control-label"></label>
+                <input type="text" id="datepicker" asp-for="Booking.BookingDateOnly" class="form-control" />
+                <span asp-validation-for="Booking.BookingDateOnly" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-
-@*<input type="text" id="timepicker">
-<input type="text" id="datepicker">*@
-
 <div>
     <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
         $(document).ready(function () {
             $('#datepicker').datepicker({
@@ -56,8 +57,8 @@
             });
             $('#timepicker').timepicker({
                 step: 15,
-                minTime: '07:00am', // set minimum time to 9am
-                maxTime: '07:00pm'   // set maximum time to 5pm
+                minTime: '07:00 AM', // set minimum time to 9am
+                maxTime: '07:00 PM'   // set maximum time to 5pm
             });
         });
     </script>

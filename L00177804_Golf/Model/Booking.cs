@@ -10,12 +10,20 @@ namespace L00177804_Golf.Model
 
         public string LastName { get; set; }
 
-        public DateTime BookingDateTime { get; set; }
+
+        public TimeOnly BookingTimeOnly { get; set; }
+
+        public DateOnly BookingDateOnly { get; set; }
 
         [NotMapped]
-        public string BookingDate => BookingDateTime.ToString("dd/mm/yy");
+        public string BookingDate => BookingDateOnly.ToString("dd/MM/yyyy");
 
         [NotMapped]
-        public string BookingTime => BookingDateTime.ToString("hh:mm tt");
+        public string BookingTime => BookingTimeOnly.ToString("hh:mm tt");
+
+   
+
+
+
     }
 }

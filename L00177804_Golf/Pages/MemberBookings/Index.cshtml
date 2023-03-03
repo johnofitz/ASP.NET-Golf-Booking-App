@@ -5,48 +5,44 @@
     ViewData["Title"] = "Index";
 }
 
-<div div class="container-md" style="padding-top: 50px">
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Date
-                        </th>
-                        <th>
-                            Time
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Booking)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName) 
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.BookingDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.BookingTime)
-                            </td>
-                            <td>
-                                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+<h1>Index</h1>
 
-
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                TEE Time
+            </th>
+            <th>
+                TEE Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Booking) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingDate)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

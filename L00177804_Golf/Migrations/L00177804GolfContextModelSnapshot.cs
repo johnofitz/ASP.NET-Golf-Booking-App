@@ -23,7 +23,10 @@ namespace L00177804Golf.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("BookingDateTime")
+                    b.Property<DateOnly>("BookingDateOnly")
+                        .HasColumnType("TEXT");
+
+                    b.Property<TimeOnly>("BookingTimeOnly")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")

@@ -25,9 +25,14 @@
                 <span asp-validation-for="Booking.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.BookingDateTime" class="control-label"></label>
-                <input asp-for="Booking.BookingDateTime" class="form-control" />
-                <span asp-validation-for="Booking.BookingDateTime" class="text-danger"></span>
+                <label asp-for="Booking.BookingTimeOnly" class="control-label"></label>
+                <input asp-for="Booking.BookingTimeOnly" class="form-control" />
+                <span asp-validation-for="Booking.BookingTimeOnly" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.BookingDateOnly" class="control-label"></label>
+                <input asp-for="Booking.BookingDateOnly" class="form-control" />
+                <span asp-validation-for="Booking.BookingDateOnly" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -20,7 +20,9 @@ namespace L00177804_Golf.Pages.MemberBookings
         }
 
         public IActionResult OnGet()
+
         {
+            //_context.Booking.ExecuteDeleteAsync();
             return Page();
         }
 

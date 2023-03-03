@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace L00177804Golf.Migrations
 {
     [DbContext(typeof(L00177804_GolfContext))]
-    [Migration("20230303152337_Booking")]
+    [Migration("20230303223837_Booking")]
     partial class Booking
     {
         /// <inheritdoc />
@@ -26,7 +26,10 @@ namespace L00177804Golf.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("BookingDateTime")
+                    b.Property<DateOnly>("BookingDateOnly")
+                        .HasColumnType("TEXT");
+
+                    b.Property<TimeOnly>("BookingTimeOnly")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
