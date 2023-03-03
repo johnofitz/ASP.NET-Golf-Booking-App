@@ -1,0 +1,52 @@
+﻿@page
+@model L00177804_Golf.Pages.MemberBookings.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div div class="container-md" style="padding-top: 50px">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Booking[0].Name)
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                        <th>
+                            Time
+                        </th>
+              @*          <th></th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Booking)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookingDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookingTime)
+                            </td>
+                       @*     <td>
+                                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

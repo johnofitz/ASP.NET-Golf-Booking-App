@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jqueryui@1.13.2",
+      "destination": "wwwroot/lib/jquery-ui/"
+
+    },
+    {
+      "library": "font-awesome@6.3.0",
+      "destination": "wwwroot/lib/fontawsome/"
+
+    }
+  ]
+}

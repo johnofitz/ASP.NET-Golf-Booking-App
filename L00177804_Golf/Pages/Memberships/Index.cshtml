@@ -1,0 +1,91 @@
+﻿@page 
+@model L00177804_Golf.Pages.Memberships.IndexModel
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+
+<div div class="container-md" style="padding-top: 50px">
+        <div class="row">
+            <div class="col-md-12">
+            <form method="get" class="form-group">
+                <div class="input-group">
+                    <input type="hidden" name="handler" value="search" />
+                    <input type="text" id="AutoFill" name="CurrentFilter" value="@Model.CurrentFilter" class="form-control rounded" />
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <a asp-page="./Index">Back</a>
+                    </div>
+                </div>
+            </form>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <a asp-page="./Index" asp-route-sorting="@Model.NameSort" asp-page-handler="Sorting" class="text-dark" style="text-decoration:none;">
+                                    <i class="fa fa-sort"></i>
+                                    Name
+                                </a>
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Membership[0].Gender)
+                            </th>
+                            <th>
+                                <a asp-page="./Index" asp-route-sorting="@Model.HandiSort" asp-page-handler="Sorting" class="text-dark" style="text-decoration:none;">
+                                    <i class="fa fa-sort"></i>
+                                    @Html.DisplayNameFor(model => model.Membership[0].Handicap)
+                                </a>
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Membership[0].Phone)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Membership[0].Email)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Membership)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Gender)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Handicap)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Phone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(function () {
+            $("#AutoFill").autocomplete({
+                source: ["Male Golfers", "Female Golfers", "Scratch Players", "Player Handicap less 10", "Player Handicap Greater than 10 and less than 20", "Player Handicap Greater 20"],
+                minLength: 3
+            });
+        });
+    </script>
+    }
+
+
+
+
