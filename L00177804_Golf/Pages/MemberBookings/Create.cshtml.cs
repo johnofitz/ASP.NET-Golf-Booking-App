@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using L00177804_Golf.Data;
 using L00177804_Golf.Model;
-using System.ComponentModel.DataAnnotations;
 
 namespace L00177804_Golf.Pages.MemberBookings
 {
@@ -25,19 +24,9 @@ namespace L00177804_Golf.Pages.MemberBookings
             return Page();
         }
 
-
         [BindProperty]
         public Booking Booking { get; set; } = default!;
-
-
-
-
-        [BindProperty, DataType(DataType.Date)]
-        public DateTime Date { get; set; }
-        [BindProperty, DataType(DataType.Time)]
-        public DateTime Time { get; set; }
-
-
+        
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()

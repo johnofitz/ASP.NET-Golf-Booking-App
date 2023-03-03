@@ -3,7 +3,6 @@ using System;
 using L00177804_Golf.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,14 +10,12 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace L00177804Golf.Migrations
 {
     [DbContext(typeof(L00177804_GolfContext))]
-    [Migration("20230302154820_Booking")]
-    partial class Booking
+    partial class L00177804GolfContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
 
             modelBuilder.Entity("L00177804_Golf.Model.Booking", b =>
                 {
@@ -29,7 +26,11 @@ namespace L00177804Golf.Migrations
                     b.Property<DateTime>("BookingDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

@@ -15,9 +15,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Booking.Id" />
             <div class="form-group">
-                <label asp-for="Booking.Name" class="control-label"></label>
-                <input asp-for="Booking.Name" class="form-control" />
-                <span asp-validation-for="Booking.Name" class="text-danger"></span>
+                <label asp-for="Booking.FirstName" class="control-label"></label>
+                <input asp-for="Booking.FirstName" class="form-control" />
+                <span asp-validation-for="Booking.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.LastName" class="control-label"></label>
+                <input asp-for="Booking.LastName" class="form-control" />
+                <span asp-validation-for="Booking.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.BookingDateTime" class="control-label"></label>

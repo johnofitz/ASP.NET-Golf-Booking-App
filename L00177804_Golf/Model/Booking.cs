@@ -6,7 +6,9 @@ namespace L00177804_Golf.Model
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
 
         public DateTime BookingDateTime { get; set; }
 
