@@ -11,6 +11,11 @@
       "library": "font-awesome@6.3.0",
       "destination": "wwwroot/lib/fontawsome/"
 
+    },
+    {
+      "library": "jquery-timepicker@1.14.0",
+      "destination": "wwwroot/lib/jquery-timepicker/"
+
     }
   ]
 }

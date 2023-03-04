@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using L00177804_Golf.Data;
 using L00177804_Golf.Model;
-using System.ComponentModel.DataAnnotations;
 
 namespace L00177804_Golf.Pages.MemberBookings
 {
@@ -21,30 +20,52 @@ namespace L00177804_Golf.Pages.MemberBookings
         }
 
         public IActionResult OnGet()
+
         {
+            //_context.Booking.ExecuteDeleteAsync();
             return Page();
         }
-
 
         [BindProperty]
         public Booking Booking { get; set; } = default!;
 
 
-
-
-        [BindProperty, DataType(DataType.Date)]
-        public DateTime Date { get; set; }
-        [BindProperty, DataType(DataType.Time)]
-        public DateTime Time { get; set; }
-
-
+        public IList<Membership> Membership { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
           if (!ModelState.IsValid || _context.Booking == null || Booking == null)
             {
+                ModelState.AddModelError(string.Empty, "There was a problem with your submission.");
                 return Page();
+            }
+
+            foreach (var item in _context.Booking)
+            {
+                if (item.FirstName.Equals(Booking.FirstName) && item.BookingDate.Equals(Booking.BookingDate))
+                {
+                    ModelState.AddModelError(string.Empty, "You can only book once per day");
+
+                    // Show the pop-up modal
+                    TempData["Message"] = "You can only book once per day";
+                    TempData["MessageType"] = "error";
+
+                    return Page();
+                }
+            }
+
+
+
+            // Match the Handicap in Database
+            foreach (var item in _context.Membership)
+            {
+                if (item.FirstName.Equals(Booking.FirstName))
+                {
+                    Booking.Handicap = item.Handicap;
+                    break;
+                }
+                
             }
 
             _context.Booking.Add(Booking);
