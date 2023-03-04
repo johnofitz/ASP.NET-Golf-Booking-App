@@ -41,20 +41,15 @@ namespace L00177804_Golf.Pages.MemberBookings
                 return Page();
             }
 
+          // Check if person has booked the same day
             foreach (var item in _context.Booking)
             {
-                if (item.FirstName.Equals(Booking.FirstName) && item.BookingDate.Equals(Booking.BookingDate))
+                if(item.FirstName.Equals(Booking.FirstName) && item.BookingDate.Equals(Booking.BookingDate))
                 {
                     ModelState.AddModelError(string.Empty, "You can only book once per day");
-
-                    // Show the pop-up modal
-                    TempData["Message"] = "You can only book once per day";
-                    TempData["MessageType"] = "error";
-
                     return Page();
                 }
             }
-
 
 
             // Match the Handicap in Database
