@@ -28,14 +28,44 @@ namespace L00177804_Golf.Pages.MemberBookings
 
         [BindProperty]
         public Booking Booking { get; set; } = default!;
-        
+
+
+        public IList<Membership> Membership { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
           if (!ModelState.IsValid || _context.Booking == null || Booking == null)
             {
+                ModelState.AddModelError(string.Empty, "There was a problem with your submission.");
                 return Page();
+            }
+
+            foreach (var item in _context.Booking)
+            {
+                if (item.FirstName.Equals(Booking.FirstName) && item.BookingDate.Equals(Booking.BookingDate))
+                {
+                    ModelState.AddModelError(string.Empty, "You can only book once per day");
+
+                    // Show the pop-up modal
+                    TempData["Message"] = "You can only book once per day";
+                    TempData["MessageType"] = "error";
+
+                    return Page();
+                }
+            }
+
+
+
+            // Match the Handicap in Database
+            foreach (var item in _context.Membership)
+            {
+                if (item.FirstName.Equals(Booking.FirstName))
+                {
+                    Booking.Handicap = item.Handicap;
+                    break;
+                }
+                
             }
 
             _context.Booking.Add(Booking);
