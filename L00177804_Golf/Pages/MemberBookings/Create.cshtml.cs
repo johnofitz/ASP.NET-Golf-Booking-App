@@ -68,6 +68,12 @@ namespace L00177804_Golf.Pages.MemberBookings
                 }
             }
 
+            if (CheckCount(Booking.BookingDate, Booking.BookingTime) == 4)
+            {
+                ModelState.AddModelError(string.Empty, "All Slots Have been taken for this time");
+                return Page();
+            }
+
 
             // Add to booking table
             _context.Booking.Add(Booking);
@@ -91,7 +97,18 @@ namespace L00177804_Golf.Pages.MemberBookings
             return nameList;
         }
 
-
+        private int CheckCount(string date, string time)
+        {
+            int count = 0;
+            foreach (var item in _context.Booking)
+            {
+                if(item.BookingDate == date &&  item.BookingTime == time)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
 
     }
 }
