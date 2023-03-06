@@ -59,4 +59,23 @@ th.sortable.desc i::before {
 .form-group {
     padding: 5px;
 }
+.about-section {
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+}
+
+.about-section h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.about-section p {
+    font-size: 16px;
+    text-align:center;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
 
