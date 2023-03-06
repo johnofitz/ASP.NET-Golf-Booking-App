@@ -5,7 +5,7 @@
 namespace L00177804Golf.Migrations
 {
     /// <inheritdoc />
-    public partial class ADDMembershipFullName : Migration
+    public partial class AddBookingFullName : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

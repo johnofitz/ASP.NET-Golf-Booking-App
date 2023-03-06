@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace L00177804Golf.Migrations
 {
     [DbContext(typeof(L00177804_GolfContext))]
-    [Migration("20230304160550_ADDBookingFullName")]
-    partial class ADDBookingFullName
+    [Migration("20230305201132_AddMembershipFullName")]
+    partial class AddMembershipFullName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,10 +33,6 @@ namespace L00177804Golf.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -63,10 +59,6 @@ namespace L00177804Golf.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

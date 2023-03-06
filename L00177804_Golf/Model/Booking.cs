@@ -10,7 +10,8 @@ namespace L00177804_Golf.Model
 
         public string LastName { get; set; }
 
-        public string FullName { get; set; }
+        
+        public string FullName => $"{FirstName} {LastName}";
 
         public int Handicap { get; set; }
         public TimeOnly BookingTimeOnly { get; set; }

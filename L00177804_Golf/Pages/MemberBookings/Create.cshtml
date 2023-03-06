@@ -86,11 +86,14 @@
             });
             $('#timepicker').timepicker({
                 step: 15,
-                minTime: '07:00 AM', // set minimum time to 9am
-                maxTime: '07:00 PM'   // set maximum time to 5pm
+                minTime: '07:00 AM',
+                maxTime: '07:00 PM',
+                disableTimeRanges: [['08:15 AM', '08:30 AM'], ['11:00 AM', '11:15 AM']],
+                timeFormat: 'h:i A'
             });
         });
     </script>
 
 
+  <!--disableTimeRanges: [['08:00 AM', '10:00 AM'], ['11:00 AM', '12:00 PM']],-->
 }
