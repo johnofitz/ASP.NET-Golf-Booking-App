@@ -49,18 +49,20 @@
         </div>
     </div>
 
-<!-- Modal -->
-<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<!-- MODAL POP-UP FOR ERROR-->
+
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="bookingModalLabel">Booking Error</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="modal-header text-center">
+                <h1 class="modal-title fs-5" id="ModalLabel">Hello</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <p>You can only book once per day</p>
+            <div class="modal-body" style="text-align:center">
+                @Model.AlertMess
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -94,6 +96,14 @@
         });
     </script>
 
+    @if (!string.IsNullOrEmpty(Model.AlertMess))
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                $("#Modal").modal("show")
+            };
+        </script>
+    }
 
   <!--disableTimeRanges: [['08:00 AM', '10:00 AM'], ['11:00 AM', '12:00 PM']],-->
 }

@@ -22,6 +22,9 @@ namespace L00177804_Golf.Pages.MemberBookings
         [BindProperty]
         public Booking Booking { get; set; } = default!;
 
+        // Alert Mesege for Success/Unsuccess
+        public string AlertMess { get; set; } = default!;
+
 
         public IList<Membership> Membership { get; set; } = default!;
 
@@ -33,13 +36,13 @@ namespace L00177804_Golf.Pages.MemberBookings
 
             if (!ModelState.IsValid || _context.Booking == null || Booking == null)
             {
-                ModelState.AddModelError(string.Empty, "There was a problem with your submission.");
+                AlertMess = "Oops, Something went wrong";
                 return Page();
             }
 
             if (!checkNames.Contains(Booking.FullName))
             {
-                ModelState.AddModelError(string.Empty, "Check details or Register");
+                AlertMess = "You dont seem to have an account, Please register";
                 return Page();
             }
 
@@ -48,7 +51,7 @@ namespace L00177804_Golf.Pages.MemberBookings
             {
                 if (item.FullName.Equals(Booking.FullName) && item.BookingDate.Equals(Booking.BookingDate))
                 {
-                    ModelState.AddModelError(string.Empty, "You can only book once per day");
+                    AlertMess = "You can only book once per day";
                     return Page();
                 }
 
@@ -67,11 +70,9 @@ namespace L00177804_Golf.Pages.MemberBookings
 
             if (CheckCount(Booking.BookingDate, Booking.BookingTime) == 4)
             {
-                ModelState.AddModelError(string.Empty, "All Slots Have been taken for this time");
+                AlertMess = "All slots have been taken for this time";
                 return Page();
             }
-
-
             // Add to booking table
             _context.Booking.Add(Booking);
             await _context.SaveChangesAsync();
@@ -94,6 +95,13 @@ namespace L00177804_Golf.Pages.MemberBookings
             return nameList;
         }
 
+        /// <summary>
+        /// Method to check the amount of bookings at a given time
+        /// slot on a specfic date
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
         private int CheckCount(string date, string time)
         {
             int count = 0;
