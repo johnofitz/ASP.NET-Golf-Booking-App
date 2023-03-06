@@ -4,7 +4,6 @@
 @{
     ViewData["Title"] = "Register at";
 }
-
 <!-- Section: Design Block -->
 <section class="">
     <!-- Jumbotron -->
@@ -20,11 +19,9 @@
                         Registration is free, complete the form
                         and Hit'Em long and straight.
                     </p>
-                 
+                    <!-- Bill murrays Picture-->
                     <img src="/Images/billMurray.jpg" class="img-fluid" style="height:340px">
-                    </div>
-                
-
+                </div>
                 <div class="col-lg-6 mb-5 mb-lg-0">
                     <div class="card">
                         <div class="card-body py-5 px-md-5">
@@ -35,12 +32,14 @@
                                         <div class="form-outline">
                                             <input asp-for="Membership.FirstName" class="form-control" />
                                             <label class="form-label" for="form3Example1">First name</label>
+                                            <span asp-validation-for="Membership.FirstName" class="text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
                                             <input asp-for="Membership.LastName" class="form-control" />
                                             <label class="form-label" for="form3Example2">Last name</label>
+                                            <span asp-validation-for="Membership.LastName" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -49,31 +48,34 @@
                                 <div class="form-outline mb-4">
                                     <input asp-for="Membership.Gender" class="form-control" />
                                     <label class="form-label" for="form3Example3">Gender</label>
+                                    <span asp-validation-for="Membership.Gender" class="text-danger"></span>
                                 </div>
 
                                 <!-- HandiCap input -->
                                 <div class="form-outline mb-4">
                                     <input asp-for="Membership.Handicap" class="form-control" />
                                     <label class="form-label" for="form3Example3">Handicap</label>
+                                    <span asp-validation-for="Membership.Handicap" class="text-danger"></span>
                                 </div>
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
                                     <input asp-for="Membership.Email" class="form-control" />
                                     <label class="form-label" for="form3Example3">Email address</label>
+                                    <span asp-validation-for="Membership.Email" class="text-danger"></span>
                                 </div>
 
                                 <!-- Phone input -->
                                 <div class="form-outline mb-4">
                                     <input asp-for="Membership.Phone" class="form-control" />
                                     <label class="form-label" for="form3Example4">Phone</label>
+                                    <span asp-validation-for="Membership.Phone" class="text-danger"></span>
                                 </div>
 
                                 <!-- Submit button -->
                                 <button type="submit" class="btn btn-primary btn-block mb-4">
                                     Sign up
                                 </button>
- 
                             </form>
                         </div>
                     </div>
@@ -81,11 +83,40 @@
             </div>
         </div>
     </div>
+
+    <!-- MODAL POP-UP FOR ERROR-->
+
+    <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-5" id="ModalLabel">Hello</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align:center">
+                    @Model.AlertMess
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Jumbotron -->
 </section>
+}
 <!-- Section: Design Block -->
-
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    @if (!string.IsNullOrEmpty(Model.AlertMess))
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                $("#Modal").modal("show")
+            };
+        </script>
+    }
 }
