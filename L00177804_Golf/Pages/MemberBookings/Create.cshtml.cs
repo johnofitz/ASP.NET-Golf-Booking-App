@@ -1,22 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using L00177804_Golf.Data;
-using L00177804_Golf.Model;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using Microsoft.EntityFrameworkCore;
-using System.Globalization;
 
 namespace L00177804_Golf.Pages.MemberBookings
 {
     public class CreateModel : PageModel
     {
         private readonly L00177804_Golf.Data.L00177804_GolfContext _context;
-        private bool _check = true; 
+        
         public CreateModel(L00177804_Golf.Data.L00177804_GolfContext context)
         {
             _context = context;
@@ -25,6 +16,7 @@ namespace L00177804_Golf.Pages.MemberBookings
         public IActionResult OnGet()
 
         {
+            // Empty database
             //_context.Booking.ExecuteDeleteAsync();
             //_context.Membership.ExecuteDeleteAsync();
             return Page();
@@ -42,22 +34,15 @@ namespace L00177804_Golf.Pages.MemberBookings
             // Return the list of names from object
             var checkNames = NameList();
 
-            if (!checkNames.Contains(Booking.FullName))
-            {
-                ModelState.AddModelError(string.Empty, "Check details or Register");
-                return Page();
-            }
-
-            //if (!_context.Membership.Any(m => m.FullName == Booking.FullName))
-            //{
-            //    ModelState.AddModelError(string.Empty, "You can only book once per day");
-            //    return Page();
-            //    // execute code if a Membership object with the given FullName exists in the Membership list
-            //}
-
             if (!ModelState.IsValid || _context.Booking == null || Booking == null)
             {
                 ModelState.AddModelError(string.Empty, "There was a problem with your submission.");
+                return Page();
+            }
+
+            if (!checkNames.Contains(Booking.FullName))
+            {
+                ModelState.AddModelError(string.Empty, "Check details or Register");
                 return Page();
             }
 
@@ -83,8 +68,14 @@ namespace L00177804_Golf.Pages.MemberBookings
                 }
             }
 
+            if (CheckCount(Booking.BookingDate, Booking.BookingTime) == 4)
+            {
+                ModelState.AddModelError(string.Empty, "All Slots Have been taken for this time");
+                return Page();
+            }
 
 
+            // Add to booking table
             _context.Booking.Add(Booking);
             await _context.SaveChangesAsync();
 
@@ -106,6 +97,18 @@ namespace L00177804_Golf.Pages.MemberBookings
             return nameList;
         }
 
+        private int CheckCount(string date, string time)
+        {
+            int count = 0;
+            foreach (var item in _context.Booking)
+            {
+                if(item.BookingDate == date &&  item.BookingTime == time)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
 
     }
 }

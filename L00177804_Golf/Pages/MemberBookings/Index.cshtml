@@ -2,10 +2,25 @@
 @model L00177804_Golf.Pages.MemberBookings.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Booking at";
 }
 
 <div div class="container-md" style="padding-top: 50px">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="get" class="form-group">
+                <div class="input-group">
+                    <input type="hidden" name="handler" value="search" />
+                    <input type="text" id="AutoFill" name="CurrentFilter" placeholder="Search Member Bookings" value="@Model.CurrentFilter" class="form-control rounded" />
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <a asp-page="./Index">Back</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <table class="table">
@@ -31,7 +46,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                                @Html.DisplayFor(modelItem => item.FullName)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Handicap)
@@ -42,7 +57,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.BookingDate)
                             </td>
-                      @*      <td>
+                            @*<td>
                                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
@@ -54,4 +69,20 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+
+ @*   <link rel="stylesheet" href="~/lib/jquery-ui/themes/smoothness/jquery-ui.css" />
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>*@
+
+    <script type="text/javascript">
+        $(function () {
+            $("#AutoFill").autocomplete({
+                source: 'MemberBookings?handler=Names',
+                minLength: 3
+            });
+        });
+    </script>
+
+}
 

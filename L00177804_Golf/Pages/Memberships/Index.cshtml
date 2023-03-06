@@ -2,6 +2,9 @@
 @model L00177804_Golf.Pages.Memberships.IndexModel
 @using Microsoft.AspNetCore.Mvc.Rendering
 
+@{
+    ViewData["Title"] = "Members at";
+}
 
 <div div class="container-md" style="padding-top: 50px">
         <div class="row">
@@ -9,7 +12,7 @@
             <form method="get" class="form-group">
                 <div class="input-group">
                     <input type="hidden" name="handler" value="search" />
-                    <input type="text" id="AutoFill" name="CurrentFilter" value="@Model.CurrentFilter" class="form-control rounded" />
+                    <input type="text" id="AutoFill" name="CurrentFilter" placeholder="Search Gender & Handicaps" value="@Model.CurrentFilter" class="form-control rounded" />
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary">Filter</button>
                         <a asp-page="./Index">Back</a>
