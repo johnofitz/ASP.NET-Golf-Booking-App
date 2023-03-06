@@ -40,6 +40,7 @@ namespace L00177804_Golf.Pages.MemberBookings
                 return Page();
             }
 
+            // Display modal if Name dosnt exist
             if (!checkNames.Contains(Booking.FullName))
             {
                 AlertMess = "You dont seem to have an account, Please register";
@@ -54,8 +55,6 @@ namespace L00177804_Golf.Pages.MemberBookings
                     AlertMess = "You can only book once per day";
                     return Page();
                 }
-
-
             }
 
             //Match the Handicap in Database
