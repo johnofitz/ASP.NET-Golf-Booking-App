@@ -32,12 +32,14 @@
                                         <div class="form-outline">
                                             <input asp-for="Membership.FirstName" class="form-control" />
                                             <label class="form-label" for="form3Example1">First name</label>
+                                            <span asp-validation-for="Membership.FirstName" class="text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
                                             <input asp-for="Membership.LastName" class="form-control" />
                                             <label class="form-label" for="form3Example2">Last name</label>
+                                            <span asp-validation-for="Membership.LastName" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -46,24 +48,28 @@
                                 <div class="form-outline mb-4">
                                     <input asp-for="Membership.Gender" class="form-control" />
                                     <label class="form-label" for="form3Example3">Gender</label>
+                                    <span asp-validation-for="Membership.Gender" class="text-danger"></span>
                                 </div>
 
                                 <!-- HandiCap input -->
                                 <div class="form-outline mb-4">
                                     <input asp-for="Membership.Handicap" class="form-control" />
                                     <label class="form-label" for="form3Example3">Handicap</label>
+                                    <span asp-validation-for="Membership.Handicap" class="text-danger"></span>
                                 </div>
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
                                     <input asp-for="Membership.Email" class="form-control" />
                                     <label class="form-label" for="form3Example3">Email address</label>
+                                    <span asp-validation-for="Membership.Email" class="text-danger"></span>
                                 </div>
 
                                 <!-- Phone input -->
                                 <div class="form-outline mb-4">
                                     <input asp-for="Membership.Phone" class="form-control" />
                                     <label class="form-label" for="form3Example4">Phone</label>
+                                    <span asp-validation-for="Membership.Phone" class="text-danger"></span>
                                 </div>
 
                                 <!-- Submit button -->

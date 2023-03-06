@@ -5,49 +5,53 @@
     ViewData["Title"] = "Book today at";
 }
 
-
+<!-- SET CONTENT TO CENTER OF PAGE VIEW-->
 <div class="d-flex justify-content-center" style="padding-top:50px">
-        <div class="row">
-            <div class="col-md-12">
-                <form method="post">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="Booking.FirstName" class="control-label">First Name</label>
-                        <input asp-for="Booking.FirstName" class="form-control" />
-                        <span asp-validation-for="Booking.FirstName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Booking.LastName" class="control-label">Surname</label>
-                        <input asp-for="Booking.LastName" class="form-control" />
-                        <span asp-validation-for="Booking.LastName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Booking.BookingTimeOnly" class="control-label">Select Tee time</label>
-                        <div class="input-group">
-                            <input type="text" id="timepicker" input asp-for="Booking.BookingTimeOnly" class="form-control" />
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="far fa-clock"></i></span>
-                            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!-- ENTRY FOR FIRST NAME-->
+                <div class="form-group">
+                    <label asp-for="Booking.FirstName" class="control-label">First Name</label>
+                    <input asp-for="Booking.FirstName" class="form-control" />
+                    <span asp-validation-for="Booking.FirstName" class="text-danger"></span>
+                </div>
+                <!-- ENTRY FOR LAST NAME-->
+                <div class="form-group">
+                    <label asp-for="Booking.LastName" class="control-label">Surname</label>
+                    <input asp-for="Booking.LastName" class="form-control" />
+                    <span asp-validation-for="Booking.LastName" class="text-danger"></span>
+                </div>
+                <!-- ENTRY FOR TIME SELECTION-->
+                <div class="form-group">
+                    <label asp-for="Booking.BookingTimeOnly" class="control-label">Select Tee time</label>
+                    <div class="input-group">
+                        <input type="text" id="timepicker" input asp-for="Booking.BookingTimeOnly" class="form-control" />
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="far fa-clock"></i></span>
                         </div>
-                        <span asp-validation-for="Booking.BookingTimeOnly" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Booking.BookingDateOnly" class="control-label">Select Date</label>
-                        <div class="input-group">
-                            <input type="text" id="datepicker" asp-for="Booking.BookingDateOnly" class="form-control" />
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                            </div>
+                    <span asp-validation-for="Booking.BookingTimeOnly" class="text-danger"></span>
+                </div>
+                <!-- ENTRY FOR DATE-->
+                <div class="form-group">
+                    <label asp-for="Booking.BookingDateOnly" class="control-label">Select Date</label>
+                    <div class="input-group">
+                        <input type="text" id="datepicker" asp-for="Booking.BookingDateOnly" class="form-control" />
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                         </div>
-                        <span asp-validation-for="Booking.BookingDateOnly" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" />
-                    </div>
-                </form>
-            </div>
+                    <span asp-validation-for="Booking.BookingDateOnly" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
 <!-- MODAL POP-UP FOR ERROR-->
 
@@ -68,15 +72,11 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <!-- DATE AND TIME PICKER JSCRIPT-->
     <script>
         $(document).ready(function () {
             $('#datepicker').datepicker({
@@ -90,12 +90,12 @@
                 step: 15,
                 minTime: '07:00 AM',
                 maxTime: '07:00 PM',
-                disableTimeRanges: [['08:15 AM', '08:30 AM'], ['11:00 AM', '11:15 AM']],
                 timeFormat: 'h:i A'
             });
         });
     </script>
 
+    <!-- EXCUTE MODAL WHEN CONDITION MEETS CODE BEHIND-->
     @if (!string.IsNullOrEmpty(Model.AlertMess))
     {
         <script type="text/javascript">
@@ -105,5 +105,6 @@
         </script>
     }
 
-  <!--disableTimeRanges: [['08:00 AM', '10:00 AM'], ['11:00 AM', '12:00 PM']],-->
+
 }
+<!--disableTimeRanges: [['08:15 AM', '08:30 AM'], ['11:00 AM', '11:15 AM']],-->

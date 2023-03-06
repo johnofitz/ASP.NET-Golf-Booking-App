@@ -3,6 +3,7 @@ namespace L00177804_Golf.Pages.MemberBookings
 {
     public class CreateModel : PageModel
     {
+        // Instantiate object for Data base
         private readonly Data.L00177804_GolfContext _context;
         
         public CreateModel(Data.L00177804_GolfContext context)
@@ -10,6 +11,10 @@ namespace L00177804_Golf.Pages.MemberBookings
             _context = context;
         }
 
+        /// <summary>
+        /// OnGet Method excutes on page load
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnGet()
 
         {
