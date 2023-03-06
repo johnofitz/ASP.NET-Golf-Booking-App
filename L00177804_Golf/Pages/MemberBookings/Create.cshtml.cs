@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿
 namespace L00177804_Golf.Pages.MemberBookings
 {
     public class CreateModel : PageModel
     {
-        private readonly L00177804_Golf.Data.L00177804_GolfContext _context;
+        private readonly Data.L00177804_GolfContext _context;
         
-        public CreateModel(L00177804_Golf.Data.L00177804_GolfContext context)
+        public CreateModel(Data.L00177804_GolfContext context)
         {
             _context = context;
         }
