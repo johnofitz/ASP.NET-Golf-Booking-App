@@ -1,4 +1,6 @@
-﻿namespace L00177804_Golf.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace L00177804_Golf.Model
 {
 
     public class Membership
@@ -8,6 +10,8 @@
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public string FullName => $"{FirstName} {LastName}";
 
         public string Gender { get; set; }
 

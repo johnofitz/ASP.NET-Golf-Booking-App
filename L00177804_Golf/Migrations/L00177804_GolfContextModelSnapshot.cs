@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace L00177804Golf.Migrations
 {
     [DbContext(typeof(L00177804_GolfContext))]
-    partial class L00177804GolfContextModelSnapshot : ModelSnapshot
+    partial class L00177804_GolfContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
