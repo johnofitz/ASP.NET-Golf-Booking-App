@@ -20,4 +20,4 @@
 
 ### Nuget Packages
 
-![Screenshot](Misc\\NugetPacks.jpg)
+![Screenshot](https://github.com/johnofitz/ASP.NET-Golf-Booking-App/blob/Refine/Misc/NugetPacks.jpg)
