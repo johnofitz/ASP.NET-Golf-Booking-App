@@ -23,6 +23,9 @@ namespace L00177804_Golf.Pages.MemberBookings
         [BindProperty]
         public Booking Booking { get; set; } = default!;
 
+        // Alert Mesege for Success/Unsuccess
+        public string AlertMess { get; set; } = default!;
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Booking == null)
@@ -43,8 +46,15 @@ namespace L00177804_Golf.Pages.MemberBookings
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+
             if (!ModelState.IsValid)
             {
+                return Page();
+            }
+            // Check count for booking on same time slot of specfic day
+            if (CheckCount(Booking.BookingDate, Booking.BookingTime) == 4)
+            {
+                AlertMess = "All slots have been taken for this time";
                 return Page();
             }
 
@@ -72,6 +82,26 @@ namespace L00177804_Golf.Pages.MemberBookings
         private bool BookingExists(int id)
         {
           return (_context.Booking?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        /// <summary>
+        /// Method to check the amount of bookings at a given time
+        /// slot on a specfic date
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        private int CheckCount(string date, string time)
+        {
+            int count = 0;
+            foreach (var item in _context.Booking)
+            {
+                if (item.BookingDate == date && item.BookingTime == time)
+                {
+                    count++;
+                }
+            }
+            return count;
         }
     }
 }

@@ -1,7 +1,10 @@
-﻿namespace L00177804_Golf.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace L00177804_Golf.Model
 {
     public class Booking
     {
+     
         public int Id { get; set; }
 
         public string FirstName { get; set; }

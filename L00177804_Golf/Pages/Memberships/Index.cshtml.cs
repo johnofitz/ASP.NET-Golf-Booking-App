@@ -9,9 +9,10 @@ namespace L00177804_Golf.Pages.Memberships
         {
             this.memberInfo = memberInfo;
         }
-
+        // List to store objects from membership database
         public IList<Membership> Membership { get; set; } = default!;
 
+        // Sorting parameters
 
         [BindProperty(SupportsGet = true)]
         public string NameSort { get; set; } = "name_desc";
@@ -20,7 +21,7 @@ namespace L00177804_Golf.Pages.Memberships
         [BindProperty(SupportsGet = true)]
         public string HandiSort { get; set; } = "handi_desc";
 
-
+        // search string
         [BindProperty(SupportsGet = true)]
         public string CurrentFilter { get; set; } = default!;
 
@@ -76,7 +77,7 @@ namespace L00177804_Golf.Pages.Memberships
 
 
         /// <summary>
-        /// 
+        /// Method to return the search filter parameter
         /// </summary>
         /// <returns></returns>
         public async Task OnGetSearch()

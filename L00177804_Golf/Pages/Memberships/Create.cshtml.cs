@@ -72,6 +72,9 @@ namespace L00177804_Golf.Pages.Memberships
             return emailList;
         }
 
+        /// <summary>
+        /// Method to Pepare items entered for adding to the database
+        /// </summary>
         private void SetList()
         {
             if (_context.Membership != null)
@@ -82,7 +85,12 @@ namespace L00177804_Golf.Pages.Memberships
             }
         }
 
-        private string CapitalizeFirstLetter(string s)
+        /// <summary>
+        /// Method to format strings entered
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns> strings formatted</returns>
+        private static string CapitalizeFirstLetter(string s)
         {
             if (string.IsNullOrEmpty(s))
                 return s;

@@ -19,8 +19,8 @@ namespace L00177804_Golf.Pages.MemberBookings
 
         {
             // Empty database
-           // _context.Booking.ExecuteDeleteAsync();
-           // _context.Membership.ExecuteDeleteAsync();
+            _context.Booking.ExecuteDeleteAsync();
+            _context.Membership.ExecuteDeleteAsync();
             return Page();
         }
 
@@ -125,7 +125,9 @@ namespace L00177804_Golf.Pages.MemberBookings
             return count;
         }
 
-
+        /// <summary>
+        /// Captilize the First letter of Surname and lower case the rest
+        /// </summary>
          private void SetList()
         {
             if (_context.Booking != null)
@@ -134,7 +136,11 @@ namespace L00177804_Golf.Pages.MemberBookings
                 Booking.LastName = CapitalizeFirstLetter(Booking.LastName);
             }
         }
-
+        /// <summary>
+        /// Method used to captiallize the first letter and lowercase the rest
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns>String formatted</returns>
         private static string CapitalizeFirstLetter(string s)
         {
             if (string.IsNullOrEmpty(s))

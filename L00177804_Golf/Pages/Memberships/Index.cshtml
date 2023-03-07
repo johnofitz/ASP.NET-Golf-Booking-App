@@ -5,7 +5,7 @@
 @{
     ViewData["Title"] = "Members at";
 }
-
+<!-- SEARCH BAR FOR FILTERING BY GENDER, HANDICAPS-->
 <div div class="container-md" style="padding-top: 50px">
         <div class="row">
             <div class="col-md-12">
@@ -24,6 +24,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+                <!-- TABLE TO DISPLAY ITEMS FROM DATABASE-->
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -76,9 +77,9 @@
             </div>
         </div>
     </div>
-
+    <!-- SCRIPTS -->
 @section scripts{
-
+    <!-- SCRIPT FOR AUTOCOMPLET SEARCH ON FILTER ITEMS-->
     <script type="text/javascript">
         $(function () {
             $("#AutoFill").autocomplete({
