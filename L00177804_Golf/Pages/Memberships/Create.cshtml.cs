@@ -48,6 +48,7 @@ namespace L00177804_Golf.Pages.Memberships
                 return Page();
             }
 
+            SetList();
             // Add new member
             _context.Membership.Add(Membership);
             await _context.SaveChangesAsync();
@@ -69,6 +70,24 @@ namespace L00177804_Golf.Pages.Memberships
                 emailList.Add(item.Email);
             }
             return emailList;
+        }
+
+        private void SetList()
+        {
+            if (_context.Membership != null)
+            {
+                Membership.Email = CapitalizeFirstLetter(Membership.Email);
+                Membership.FirstName = CapitalizeFirstLetter(Membership.FirstName);
+                Membership.LastName = CapitalizeFirstLetter(Membership.LastName);
+            }
+        }
+
+        private string CapitalizeFirstLetter(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return s;
+
+            return char.ToUpper(s[0]) + s[1..].ToLower();
         }
     }
 }

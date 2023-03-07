@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace L00177804_Golf.Model
+﻿namespace L00177804_Golf.Model
 {
     public class Booking
     {
@@ -12,6 +10,8 @@ namespace L00177804_Golf.Model
 
         
         public string FullName => $"{FirstName} {LastName}";
+
+        public string Email { get; set; }
 
         public int Handicap { get; set; }
         public TimeOnly BookingTimeOnly { get; set; }

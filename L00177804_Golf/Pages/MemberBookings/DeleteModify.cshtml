@@ -5,56 +5,84 @@
     ViewData["Title"] = "DeleteModify";
 }
 
-<h1>DeleteModify</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Booking[0].FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Booking[0].LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Booking[0].Handicap)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Booking[0].BookingTimeOnly)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Booking[0].BookingDateOnly)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Booking) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Handicap)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingTimeOnly)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingDateOnly)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+<!-- CENTER ELEMENTS JUST-->
+    <div class="row">
+        <div class="col-md-12">
+            <form method="get" class="form-group">
+                <div class="input-group">
+                    <input type="hidden" name="handler" value="search" />
+                    <input type="text" id="AutoFill" name="CurrentFilter" placeholder="Search Member Bookings" value="@Model.CurrentFilter" class="form-control rounded" />
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <a asp-page="./Index">Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@if (!string.IsNullOrEmpty(Model.CurrentFilter))
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Booking[0].FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Booking[0].LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Booking[0].Handicap)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Booking[0].BookingTimeOnly)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Booking[0].BookingDateOnly)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Booking)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Handicap)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingTimeOnly)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingDateOnly)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-    </tbody>
-</table>
+@section scripts{
+
+    <!-- SCRIPT TO RETURN LIST OF MEMBERS FROM DATABASE-->
+    <script type="text/javascript">
+        $(function () {
+            $("#AutoFill").autocomplete({
+                source: 'MemberBookings?handler=Names',
+                minLength: 3
+            });
+        });
+    </script>
+
+}
