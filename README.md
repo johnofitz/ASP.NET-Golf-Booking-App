@@ -1,1 +1,23 @@
-# L00177804_Golf
+# Golf CA2
+### Student No: L00177804
+### Student Name : John Fitzgerald
+##
+#### Libraries added using client-side packages
+    {
+      "library": "jqueryui@1.13.2",
+      "destination": "wwwroot/lib/jquery-ui/"
+
+    },
+    {
+      "library": "font-awesome@6.3.0",
+      "destination": "wwwroot/lib/fontawsome/"
+
+    },
+    {
+      "library": "jquery-timepicker@1.14.0",
+      "destination": "wwwroot/lib/jquery-timepicker/"
+    }
+
+### Nuget Packages
+
+![Screenshot](Misc\\NugetPacks.jpg)
