@@ -20,4 +20,22 @@
 
 ### Nuget Packages
 
-![Screenshot](Misc\\NugetPacks.jpg)
+![](/Misc/NugetPacks.jpg "Nuget Packages")
+
+#### Query
+
+- Member Gender
+- Handicap golfers various ranges
+- All booking for selected member
+
+#### Sort
+
+- Member Ascend
+- Members Descend
+
+#### Validations
+
+-
+-
+-
+-
