@@ -19,8 +19,8 @@ namespace L00177804_Golf.Pages.MemberBookings
 
         {
             // Empty database
-            _context.Booking.ExecuteDeleteAsync();
-            _context.Membership.ExecuteDeleteAsync();
+            //_context.Booking.ExecuteDeleteAsync();
+            //_context.Membership.ExecuteDeleteAsync();
             return Page();
         }
 
@@ -37,7 +37,9 @@ namespace L00177804_Golf.Pages.MemberBookings
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            
+            // format names
+            SetList();
+
             if (_context.Booking == null || Booking == null)
             {
                 AlertMess = "Oops, Something went wrong";
@@ -62,7 +64,7 @@ namespace L00177804_Golf.Pages.MemberBookings
                     break;
                 }
             }
-            SetList();
+           
 
             // Check if person has booked the same day
             foreach (var item in _context.Booking)

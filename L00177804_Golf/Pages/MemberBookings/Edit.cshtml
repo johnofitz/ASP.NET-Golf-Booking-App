@@ -4,51 +4,52 @@
 @{
     ViewData["Title"] = "Hi" + @Html.DisplayFor(model => model.Booking.FirstName);
 }
-<h4>Hi + @Html.DisplayFor(model => model.Booking.FirstName)</h4>
+
+<h4>Booking</h4>
 <hr />
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form method="post" class="p-3 border">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Booking.Id" />
-                <input type="hidden" asp-for="Booking.FirstName" />
-                <input type="hidden" asp-for="Booking.LastName" />
-                <input type="hidden" asp-for="Booking.Handicap" />
-                <input type="hidden" asp-for="Booking.Email" />      
-                <!-- ENTRY FOR TIME SELECTION-->
-                <div class="form-group">
-                    <label asp-for="Booking.BookingTimeOnly" class="control-label">Select Tee time</label>
-                    <div class="input-group">
-                        <input type="text" id="timepicker" input asp-for="Booking.BookingTimeOnly" class="form-control" />
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="far fa-clock"></i></span>
-                        </div>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Booking.Id" />
+            <input type="hidden" asp-for="Booking.Email" />
+            <input type="hidden" asp-for="Booking.Handicap" />
+            <input type="hidden" asp-for="Booking.FirstName" />
+            <input type="hidden" asp-for="Booking.LastName" />
+
+            <!-- ENTRY FOR TIME SELECTION-->
+            <div class="form-group">
+                <label asp-for="Booking.BookingTimeOnly" class="control-label">Select Tee time</label>
+                <div class="input-group">
+                    <input type="text" id="timepicker" input asp-for="Booking.BookingTimeOnly" class="form-control" />
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-clock"></i></span>
                     </div>
-                    <span asp-validation-for="Booking.BookingTimeOnly" class="text-danger"></span>
                 </div>
-                <!-- ENTRY FOR DATE-->
-                <div class="form-group">
-                    <label asp-for="Booking.BookingDateOnly" class="control-label">Select Date</label>
-                    <div class="input-group">
-                        <input type="text" id="datepicker" asp-for="Booking.BookingDateOnly" class="form-control" />
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                        </div>
+                <span asp-validation-for="Booking.BookingTimeOnly" class="text-danger"></span>
+            </div>
+            <!-- ENTRY FOR DATE-->
+            <div class="form-group">
+                <label asp-for="Booking.BookingDateOnly" class="control-label">Select Date</label>
+                <div class="input-group">
+                    <input type="text" id="datepicker" asp-for="Booking.BookingDateOnly" class="form-control" />
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                     </div>
-                    <span asp-validation-for="Booking.BookingDateOnly" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" style="align-self:center" />
-                </div>
-            </form>
-        </div>
-    </div>
-    <div>
-        <a asp-page="./Index">Back to List</a>
+                <span asp-validation-for="Booking.BookingDateOnly" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
 </div>
 
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
 
 <!-- MODAL POP-UP FOR ERROR-->
 
