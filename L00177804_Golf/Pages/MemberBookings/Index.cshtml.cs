@@ -1,10 +1,4 @@
-﻿using L00177804_Golf.Data;
-using Microsoft.CodeAnalysis.Elfie.Serialization;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
-using System.Runtime.Intrinsics.X86;
-
+﻿
 
 namespace L00177804_Golf.Pages.MemberBookings
 {
@@ -36,14 +30,7 @@ namespace L00177804_Golf.Pages.MemberBookings
 
         public JsonResult OnGetNames()
         {
-            List<string> nameList = new List<string>();
-
-            foreach (var item in _context.Membership)
-            {
-                nameList.Add(item.FullName);
-                Debug.WriteLine(item.FullName); // add a debug statement here
-            }
-
+            var nameList = _context.Membership.Select(item => item.FullName).ToList();
             return new JsonResult(nameList);
         }
 

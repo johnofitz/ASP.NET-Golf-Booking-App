@@ -5,9 +5,9 @@ namespace L00177804_Golf.Pages.Memberships
     public class CreateModel : PageModel
     {
         // Instantiate Object for database
-        private readonly Data.L00177804_GolfContext _context;
+        private readonly L00177804_GolfContext _context;
 
-        public CreateModel(Data.L00177804_GolfContext context)
+        public CreateModel(L00177804_GolfContext context)
         {
             _context = context;
         }

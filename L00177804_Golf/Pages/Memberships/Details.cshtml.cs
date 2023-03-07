@@ -4,9 +4,9 @@ namespace L00177804_Golf.Pages.Memberships
 {
     public class DetailsModel : PageModel
     {
-        private readonly L00177804_Golf.Data.L00177804_GolfContext _context;
+        private readonly L00177804_GolfContext _context;
 
-        public DetailsModel(L00177804_Golf.Data.L00177804_GolfContext context)
+        public DetailsModel(L00177804_GolfContext context)
         {
             _context = context;
         }

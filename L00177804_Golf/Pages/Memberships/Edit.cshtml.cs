@@ -4,9 +4,9 @@ namespace L00177804_Golf.Pages.Memberships
 {
     public class EditModel : PageModel
     {
-        private readonly L00177804_Golf.Data.L00177804_GolfContext _context;
+        private readonly L00177804_GolfContext _context;
 
-        public EditModel(L00177804_Golf.Data.L00177804_GolfContext context)
+        public EditModel(L00177804_GolfContext context)
         {
             _context = context;
         }

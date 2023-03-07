@@ -1,16 +1,11 @@
 ﻿
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow.ValueContentAnalysis;
-using Newtonsoft.Json.Serialization;
-using System.Linq;
-
 namespace L00177804_Golf.Pages.Memberships
 {
     public class IndexModel : PageModel
     {
-        private readonly L00177804_Golf.Data.L00177804_GolfContext memberInfo;
+        private readonly L00177804_GolfContext memberInfo;
 
-        public IndexModel(L00177804_Golf.Data.L00177804_GolfContext memberInfo)
+        public IndexModel(L00177804_GolfContext memberInfo)
         {
             this.memberInfo = memberInfo;
         }

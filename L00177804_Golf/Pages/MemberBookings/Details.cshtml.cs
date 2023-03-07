@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using L00177804_Golf.Data;
-using L00177804_Golf.Model;
-
+﻿
 namespace L00177804_Golf.Pages.MemberBookings
 {
     public class DetailsModel : PageModel
