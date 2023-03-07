@@ -2,10 +2,8 @@
 @model L00177804_Golf.Pages.MemberBookings.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Hi" + @Html.DisplayFor(model => model.Booking.FirstName);
 }
-
-<h1>Edit</h1>
 
 <h4>Booking</h4>
 <hr />
@@ -14,26 +12,34 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Booking.Id" />
+            <input type="hidden" asp-for="Booking.Email" />
+            <input type="hidden" asp-for="Booking.Handicap" />
+            <input type="hidden" asp-for="Booking.FirstName" />
+            <input type="hidden" asp-for="Booking.LastName" />
+
+            <!-- ENTRY FOR TIME SELECTION-->
             <div class="form-group">
-                <label asp-for="Booking.FirstName" class="control-label"></label>
-                <input asp-for="Booking.FirstName" class="form-control" />
-                <span asp-validation-for="Booking.FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Booking.LastName" class="control-label"></label>
-                <input asp-for="Booking.LastName" class="form-control" />
-                <span asp-validation-for="Booking.LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Booking.BookingTimeOnly" class="control-label"></label>
-                <input asp-for="Booking.BookingTimeOnly" class="form-control" />
+                <label asp-for="Booking.BookingTimeOnly" class="control-label">Select Tee time</label>
+                <div class="input-group">
+                    <input type="text" id="timepicker" input asp-for="Booking.BookingTimeOnly" class="form-control" />
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-clock"></i></span>
+                    </div>
+                </div>
                 <span asp-validation-for="Booking.BookingTimeOnly" class="text-danger"></span>
             </div>
+            <!-- ENTRY FOR DATE-->
             <div class="form-group">
-                <label asp-for="Booking.BookingDateOnly" class="control-label"></label>
-                <input asp-for="Booking.BookingDateOnly" class="form-control" />
+                <label asp-for="Booking.BookingDateOnly" class="control-label">Select Date</label>
+                <div class="input-group">
+                    <input type="text" id="datepicker" asp-for="Booking.BookingDateOnly" class="form-control" />
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                </div>
                 <span asp-validation-for="Booking.BookingDateOnly" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -45,6 +51,58 @@
     <a asp-page="./Index">Back to List</a>
 </div>
 
+<!-- MODAL POP-UP FOR ERROR-->
+
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h1 class="modal-title fs-5" id="ModalLabel">Hello</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                @Model.AlertMess
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+        <!-- DATE AND TIME PICKER JSCRIPT-->
+        <script>
+            $(document).ready(function () {
+                $('#datepicker').datepicker({
+                    showOptions: { speed: 'fast' },
+                    changeMonth: false,
+                    changeYear: false,
+                    dateFormat: 'dd/mm/yy',
+                    gotoCurrent: true
+                });
+                $('#timepicker').timepicker({
+                    step: 15,
+                    minTime: '07:00 AM',
+                    maxTime: '07:00 PM',
+                    timeFormat: 'h:i A'
+                });
+            });
+        </script>
+
+
+        <!-- EXCUTE MODAL WHEN CONDITION MEETS CODE BEHIND-->
+        @if (!string.IsNullOrEmpty(Model.AlertMess))
+        {
+            <script type="text/javascript">
+                window.onload = function () {
+                    $("#Modal").modal("show")
+                };
+            </script>
+        }
+    }
 }

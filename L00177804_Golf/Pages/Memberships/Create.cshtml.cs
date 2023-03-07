@@ -5,9 +5,9 @@ namespace L00177804_Golf.Pages.Memberships
     public class CreateModel : PageModel
     {
         // Instantiate Object for database
-        private readonly Data.L00177804_GolfContext _context;
+        private readonly L00177804_GolfContext _context;
 
-        public CreateModel(Data.L00177804_GolfContext context)
+        public CreateModel(L00177804_GolfContext context)
         {
             _context = context;
         }
@@ -48,6 +48,7 @@ namespace L00177804_Golf.Pages.Memberships
                 return Page();
             }
 
+            SetList();
             // Add new member
             _context.Membership.Add(Membership);
             await _context.SaveChangesAsync();
@@ -69,6 +70,32 @@ namespace L00177804_Golf.Pages.Memberships
                 emailList.Add(item.Email);
             }
             return emailList;
+        }
+
+        /// <summary>
+        /// Method to Pepare items entered for adding to the database
+        /// </summary>
+        private void SetList()
+        {
+            if (_context.Membership != null)
+            {
+                Membership.Email = CapitalizeFirstLetter(Membership.Email);
+                Membership.FirstName = CapitalizeFirstLetter(Membership.FirstName);
+                Membership.LastName = CapitalizeFirstLetter(Membership.LastName);
+            }
+        }
+
+        /// <summary>
+        /// Method to format strings entered
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns> strings formatted</returns>
+        private static string CapitalizeFirstLetter(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return s;
+
+            return char.ToUpper(s[0]) + s[1..].ToLower();
         }
     }
 }

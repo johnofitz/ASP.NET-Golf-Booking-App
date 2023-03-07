@@ -79,3 +79,17 @@ th.sortable.desc i::before {
     margin-bottom: 20px;
 }
 
+
+dl.row {
+    border-bottom: 1px solid #ccc;
+}
+
+dt, dd {
+    margin-top: 10px;
+    text-align: justify;
+}
+
+
+
+
+

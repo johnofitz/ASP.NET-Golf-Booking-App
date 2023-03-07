@@ -1,8 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace L00177804_Golf.Model
+﻿namespace L00177804_Golf.Model
 {
-
     public class Membership
     {
         public int Id { get; set; }

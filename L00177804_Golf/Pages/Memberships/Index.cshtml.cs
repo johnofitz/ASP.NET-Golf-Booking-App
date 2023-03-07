@@ -1,22 +1,18 @@
 ﻿
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow.ValueContentAnalysis;
-using Newtonsoft.Json.Serialization;
-using System.Linq;
-
 namespace L00177804_Golf.Pages.Memberships
 {
     public class IndexModel : PageModel
     {
-        private readonly L00177804_Golf.Data.L00177804_GolfContext memberInfo;
+        private readonly L00177804_GolfContext memberInfo;
 
-        public IndexModel(L00177804_Golf.Data.L00177804_GolfContext memberInfo)
+        public IndexModel(L00177804_GolfContext memberInfo)
         {
             this.memberInfo = memberInfo;
         }
-
+        // List to store objects from membership database
         public IList<Membership> Membership { get; set; } = default!;
 
+        // Sorting parameters
 
         [BindProperty(SupportsGet = true)]
         public string NameSort { get; set; } = "name_desc";
@@ -25,7 +21,7 @@ namespace L00177804_Golf.Pages.Memberships
         [BindProperty(SupportsGet = true)]
         public string HandiSort { get; set; } = "handi_desc";
 
-
+        // search string
         [BindProperty(SupportsGet = true)]
         public string CurrentFilter { get; set; } = default!;
 
@@ -81,7 +77,7 @@ namespace L00177804_Golf.Pages.Memberships
 
 
         /// <summary>
-        /// 
+        /// Method to return the search filter parameter
         /// </summary>
         /// <returns></returns>
         public async Task OnGetSearch()

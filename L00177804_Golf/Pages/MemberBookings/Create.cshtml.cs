@@ -4,9 +4,9 @@ namespace L00177804_Golf.Pages.MemberBookings
     public class CreateModel : PageModel
     {
         // Instantiate object for Data base
-        private readonly Data.L00177804_GolfContext _context;
+        private readonly L00177804_GolfContext _context;
         
-        public CreateModel(Data.L00177804_GolfContext context)
+        public CreateModel(L00177804_GolfContext context)
         {
             _context = context;
         }
@@ -24,33 +24,47 @@ namespace L00177804_Golf.Pages.MemberBookings
             return Page();
         }
 
+        // Booking Object for Razor View
         [BindProperty]
         public Booking Booking { get; set; } = default!;
 
         // Alert Mesege for Success/Unsuccess
         public string AlertMess { get; set; } = default!;
 
-
+        // List for Member Cross reference
         public IList<Membership> Membership { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            // Return the list of names from object
-            var checkNames = NameList();
+            // format names
+            SetList();
 
-            if (!ModelState.IsValid || _context.Booking == null || Booking == null)
+            if (_context.Booking == null || Booking == null)
             {
                 AlertMess = "Oops, Something went wrong";
                 return Page();
             }
-
+            // Return the list of names from object
+            var checkNames = NameList();
             // Display modal if Name dosnt exist
             if (!checkNames.Contains(Booking.FullName))
             {
                 AlertMess = "You dont seem to have an account, Please register";
                 return Page();
             }
+
+            //Match the Handicap in Database
+            foreach (var item in _context.Membership)
+            {
+                if (item.FullName.Equals(Booking.FullName))
+                {
+                    Booking.Handicap = item.Handicap;
+                    Booking.Email = item.Email;
+                    break;
+                }
+            }
+           
 
             // Check if person has booked the same day
             foreach (var item in _context.Booking)
@@ -62,21 +76,15 @@ namespace L00177804_Golf.Pages.MemberBookings
                 }
             }
 
-            //Match the Handicap in Database
-            foreach (var item in _context.Membership)
-            {
-                if (item.FullName.Equals(Booking.FullName))
-                {
-                    Booking.Handicap = item.Handicap;
-                    break;
-                }
-            }
-
+        
+            // Check count for booking on same time slot of specfic day
             if (CheckCount(Booking.BookingDate, Booking.BookingTime) == 4)
             {
                 AlertMess = "All slots have been taken for this time";
                 return Page();
             }
+
+            
             // Add to booking table
             _context.Booking.Add(Booking);
             await _context.SaveChangesAsync();
@@ -117,6 +125,30 @@ namespace L00177804_Golf.Pages.MemberBookings
                 }
             }
             return count;
+        }
+
+        /// <summary>
+        /// Captilize the First letter of Surname and lower case the rest
+        /// </summary>
+         private void SetList()
+        {
+            if (_context.Booking != null)
+            {   
+                Booking.FirstName = CapitalizeFirstLetter(Booking.FirstName);
+                Booking.LastName = CapitalizeFirstLetter(Booking.LastName);
+            }
+        }
+        /// <summary>
+        /// Method used to captiallize the first letter and lowercase the rest
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns>String formatted</returns>
+        private static string CapitalizeFirstLetter(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return s;
+
+            return char.ToUpper(s[0]) + s[1..].ToLower();
         }
 
     }
