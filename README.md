@@ -45,9 +45,14 @@
 -
 -
 
+#### Sample Pages:
+
 <p align="center">
   <img src="/Misc/home.jpg" alt="Image 1" width="400" style="display: inline-block;"/>
   <img src="/Misc/register.jpg" alt="Image 2" width="400" style="display: inline-block;"/>
 </p>
 
-
+<p align="center">
+  <img src="/Misc/members.jpg" alt="Image 1" width="400" style="display: inline-block;"/>
+  <img src="/Misc/booking.jpg" alt="Image 2" width="400" style="display: inline-block;"/>
+</p>
