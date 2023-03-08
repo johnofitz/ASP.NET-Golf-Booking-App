@@ -1,8 +1,12 @@
+
 # Golf CA2
+
 ### Student No: L00177804
-### Student Name : John Fitzgerald
-##
-#### Libraries added using client-side packages
+
+### Student Name: John Fitzgerald
+
+### Libraries added using client-side packages
+
     {
       "library": "jqueryui@1.13.2",
       "destination": "wwwroot/lib/jquery-ui/"
@@ -23,18 +27,18 @@
 
 ![](/Misc/NugetPacks.jpg "Nuget Packages")
 
-#### Query
+#### Query:
 
 - Member Gender
 - Handicap golfers various ranges
 - All booking for selected member
 
-#### Sort
+#### Sort:
 
 - Member Ascend
 - Members Descend
 
-#### Validations
+#### Validations:
 
 -
 -
