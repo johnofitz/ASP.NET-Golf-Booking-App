@@ -47,12 +47,11 @@
 
 #### Sample Pages:
 
-<p align="center">
-  <img src="/Misc/home.jpg" alt="Image 1" width="400" height="150"style="display: inline-block;"/>
-  <img src="/Misc/register.jpg" alt="Image 2" width="400" height="150"style="display: inline-block;"/>
-</p>
-
-<p align="center">
-  <img src="/Misc/members.jpg" alt="Image 1" width="400" height="150"style="display: inline-block;"/>
-  <img src="/Misc/booking.jpg" alt="Image 2" width="400" height="150"style="display: inline-block;"/>
-</p>
+<div style="display: inline-block; margin-right: 20px; margin-bottom: 50px;">
+  <img src="/Misc/home.jpg" alt="Image 1" width="400" height="150" style="display: block;"/>
+  <img src="/Misc/register.jpg" alt="Image 2" width="400" height="150" style="display: block;"/>
+</div>
+<div style="display: inline-block; margin-right: 20px; margin-bottom: 50px;">
+  <img src="/Misc/members.jpg" alt="Image 1" width="400" height="150" style="display: block;"/>
+  <img src="/Misc/booking.jpg" alt="Image 2" width="400" height="150" style="display: block;"/>
+</div>
