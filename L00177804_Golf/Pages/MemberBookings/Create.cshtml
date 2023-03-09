@@ -77,10 +77,14 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <!-- DATE AND TIME PICKER JSCRIPT-->
+ 
     <script>
+        // Get the current date and time
+        
         $(document).ready(function () {
             $('#datepicker').datepicker({
                 showOptions: { speed: 'fast' },
+                minDate:0,
                 changeMonth: false,
                 changeYear: false,
                 dateFormat: 'dd/mm/yy',

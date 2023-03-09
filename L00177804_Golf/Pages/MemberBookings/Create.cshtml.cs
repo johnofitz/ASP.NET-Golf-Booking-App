@@ -19,8 +19,6 @@ namespace L00177804_Golf.Pages.MemberBookings
 
         {
             // Empty database
-            //_context.Booking.ExecuteDeleteAsync();
-            //_context.Membership.ExecuteDeleteAsync();
             return Page();
         }
 

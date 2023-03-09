@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace L00177804_Golf.Pages
+namespace L00177804_Golf.Pages.Shared
 {
     public class PrivacyModel : PageModel
     {
