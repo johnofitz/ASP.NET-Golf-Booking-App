@@ -56,11 +56,6 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.BookingDate)
                             </td>
-                            @*<td>
-                                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                            </td>*@
                         </tr>
                     }
                 </tbody>
@@ -68,6 +63,24 @@
         </div>
     </div>
 </div>
+
+<!-- MODAL POP-UP FOR ERROR-->
+
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h1 class="modal-title fs-5" id="ModalLabel">Hello</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                @Model.AlertMess
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 
 @section scripts{
 
@@ -80,6 +93,15 @@
             });
         });
     </script>
+
+        @if (!string.IsNullOrEmpty(Model.AlertMess))
+        {
+            <script type="text/javascript">
+                window.onload = function () {
+                    $("#Modal").modal("show")
+                };
+            </script>
+        }
 
 }
 
