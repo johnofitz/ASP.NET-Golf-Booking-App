@@ -87,38 +87,36 @@ namespace L00177804_Golf.Pages.Memberships
             {
                 if (!string.IsNullOrEmpty(CurrentFilter))
                 {
-                    if (CurrentFilter == "Male Golfers")
+                    switch (CurrentFilter)
                     {
-                        membershipQuery = membershipQuery.Where(s => s.Gender.Contains("Male"));
-                    }
-                    if (CurrentFilter == "Female Golfers")
-                    {
-                        membershipQuery = membershipQuery.Where(s => s.Gender.Contains("Female"));
-                    }
-                    if (CurrentFilter == "Scratch Players")
-                    {
-                        membershipQuery = membershipQuery.Where(s => s.Handicap.Equals(0));
-                    }
-                    if (CurrentFilter == "Player Handicap less 10")
-                    {
-                        membershipQuery = membershipQuery.Where(n => n.Handicap >= 1 && n.Handicap <= 10);
-                    }
-                    if (CurrentFilter == "Player Handicap Greater than 10 and less than 20")
-                    {
-                        membershipQuery = membershipQuery.Where(n => n.Handicap > 10 && n.Handicap < 20);
-                    }
-                    if (CurrentFilter == "Player Handicap Greater 20")
-                    {
-                        membershipQuery = membershipQuery.Where(n => n.Handicap > 20);
-                    }
-                    foreach(var membership in membershipQuery)
-                    {
-                        if (membership.FirstName == CurrentFilter)
-                        {
+                        case "Male Golfers":
+                            membershipQuery = membershipQuery.Where(s => s.Gender == "Male");
+                            break;
+                        case "Female Golfers":
+                            membershipQuery = membershipQuery.Where(s => s.Gender == "Female");
+                            break;
+                        case "Non-Binary Golfers":
+                            membershipQuery = membershipQuery.Where(s => s.Gender == "Non-binary");
+                            break;
+                        case "Other Golfers":
+                            membershipQuery = membershipQuery.Where(s => s.Gender == "Other");
+                            break;
+                        case "Scratch Players":
+                            membershipQuery = membershipQuery.Where(s => s.Handicap == 0);
+                            break;
+                        case "Player Handicap less 10":
+                            membershipQuery = membershipQuery.Where(s => s.Handicap > 0 && s.Handicap <= 10);
+                            break;
+                        case "Player Handicap Greater than 10 and less than 20":
+                            membershipQuery = membershipQuery.Where(s => s.Handicap > 10 && s.Handicap < 20);
+                            break;
+                        case "Player Handicap Greater 20":
+                            membershipQuery = membershipQuery.Where(s => s.Handicap > 20);
+                            break;
+                        default:
                             membershipQuery = membershipQuery.Where(s => s.FirstName == CurrentFilter);
-                        }
-                    }
-
+                            break;
+                    }    
                 }
             }
             catch (Exception ex)

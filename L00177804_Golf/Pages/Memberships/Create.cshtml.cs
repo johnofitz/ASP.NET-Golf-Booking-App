@@ -31,13 +31,12 @@ namespace L00177804_Golf.Pages.Memberships
         /// <returns>Redirect to Members list</returns>
         public async Task<IActionResult> OnPostAsync()
         {
-          // Check if Valid and no null properties
-          if (!ModelState.IsValid || _context.Membership == null || Membership == null)
+            // Check if Valid and no null properties
+            if (!ModelState.IsValid || _context.Membership == null || Membership == null)
             {
                 AlertMess = "Oops, Something went wrong";
                 return Page();
             }
-
             // Return the list of names from object
             var checkEmails = EmailList();
 
