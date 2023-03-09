@@ -126,8 +126,5 @@ namespace L00177804_Golf.Pages.Memberships
             Membership = await membershipQuery.ToListAsync();
         }
     }
-
-
-
 }
 
