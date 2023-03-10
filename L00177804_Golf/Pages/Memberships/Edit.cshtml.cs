@@ -1,5 +1,7 @@
 ﻿
 
+using System.Text.RegularExpressions;
+
 namespace L00177804_Golf.Pages.Memberships
 {
     public class EditModel : PageModel
@@ -10,6 +12,8 @@ namespace L00177804_Golf.Pages.Memberships
         {
             _context = context;
         }
+        // Alert Mesege for Success/Unsuccess
+        public string AlertMess { get; set; } = default!;
 
         [BindProperty]
         public Membership Membership { get; set; } = default!;
@@ -41,6 +45,18 @@ namespace L00177804_Golf.Pages.Memberships
 
             _context.Attach(Membership).State = EntityState.Modified;
 
+            if (!IsValidEmail(Membership.Email))
+            {
+                AlertMess = "Not a Valid Email";
+                return Page();
+            }
+
+            if (!IsValidPhoneNumber(Membership.Phone))
+            {
+                AlertMess = "Phone Number requires 10-12 digits";
+                return Page();
+            }
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -63,6 +79,20 @@ namespace L00177804_Golf.Pages.Memberships
         private bool MembershipExists(int id)
         {
           return (_context.Membership?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+
+
+        public bool IsValidPhoneNumber(string phoneNumber)
+        {
+            Regex regex = new(@"^\+?\d{10,12}$"); // Regular expression for phone numbers
+            return regex.IsMatch(phoneNumber);
+        }
+
+        public bool IsValidEmail(string email)
+        {
+            Regex regex = new(@"^[^@\s]+@[^@\s]+\.[^@\s]+$"); // Regular expression for email addresses
+            return regex.IsMatch(email);
         }
     }
 }

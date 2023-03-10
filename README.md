@@ -43,6 +43,8 @@
 - Capatilize Names passed from Input
 - All input Fields required
 - Edit or Delete by email entry
+- Phone Validation 10-12 digits
+- Email Validation @/.com.ie ect
 
 #### Sample Pages:
 

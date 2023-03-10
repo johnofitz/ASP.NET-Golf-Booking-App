@@ -15,12 +15,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Membership.Id" />
             <div class="form-group">
-                <label asp-for="Membership.FirstName" class="control-label"></label>
+                <label asp-for="Membership.FirstName" class="control-label">First Name</label>
                 <input asp-for="Membership.FirstName" class="form-control" />
                 <span asp-validation-for="Membership.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Membership.LastName" class="control-label"></label>
+                <label asp-for="Membership.LastName" class="control-label">Surname</label>
                 <input asp-for="Membership.LastName" class="form-control" />
                 <span asp-validation-for="Membership.LastName" class="text-danger"></span>
             </div>
@@ -38,17 +38,17 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Membership.Handicap" class="control-label"></label>
+                <label asp-for="Membership.Handicap" class="control-label">Handicap</label>
                 <input asp-for="Membership.Handicap" class="form-control" />
                 <span asp-validation-for="Membership.Handicap" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Membership.Phone" class="control-label"></label>
+                <label asp-for="Membership.Phone" class="control-label">Phone</label>
                 <input asp-for="Membership.Phone" class="form-control" />
                 <span asp-validation-for="Membership.Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Membership.Email" class="control-label"></label>
+                <label asp-for="Membership.Email" class="control-label">Email</label>
                 <input asp-for="Membership.Email" class="form-control" />
                 <span asp-validation-for="Membership.Email" class="text-danger"></span>
             </div>
@@ -58,11 +58,38 @@
         </form>
     </div>
 </div>
+<!-- MODAL POP-UP FOR ERROR-->
 
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h1 class="modal-title fs-5" id="ModalLabel">Hello</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                @Model.AlertMess
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div>
     <a asp-page="./Index">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    @if (!string.IsNullOrEmpty(Model.AlertMess))
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                $("#Modal").modal("show")
+            };
+        </script>
+    }
 }

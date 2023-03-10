@@ -1,5 +1,7 @@
 ﻿
 
+using System.Text.RegularExpressions;
+
 namespace L00177804_Golf.Pages.Memberships
 {
     public class CreateModel : PageModel
@@ -44,6 +46,18 @@ namespace L00177804_Golf.Pages.Memberships
             if (checkEmails.Contains(Membership.Email))
             {
                 AlertMess = "Email Already exists";
+                return Page();
+            }
+
+            if(!IsValidEmail(Membership.Email))
+            {
+                AlertMess = "Not a Valid Email";
+                return Page();
+            }
+
+            if(!IsValidPhoneNumber(Membership.Phone))
+            {
+                AlertMess = "Phone Number requires 10-12 digits";
                 return Page();
             }
 
@@ -95,6 +109,19 @@ namespace L00177804_Golf.Pages.Memberships
                 return s;
 
             return char.ToUpper(s[0]) + s[1..].ToLower();
+        }
+
+
+        public bool IsValidPhoneNumber(string phoneNumber)
+        {
+            Regex regex = new(@"^\+?\d{10,12}$"); // Regular expression for phone numbers
+            return regex.IsMatch(phoneNumber);
+        }
+
+        public bool IsValidEmail(string email)
+        {
+            Regex regex = new(@"^[^@\s]+@[^@\s]+\.[^@\s]+$"); // Regular expression for email addresses
+            return regex.IsMatch(email);
         }
     }
 }
