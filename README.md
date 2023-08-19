@@ -1,4 +1,4 @@
-
+[![.NET](https://github.com/johnofitz/ASP.NET-Golf-Booking-App/actions/workflows/dotnet.yml/badge.svg)](https://github.com/johnofitz/ASP.NET-Golf-Booking-App/actions/workflows/dotnet.yml)
 # Golf CA2
 
 ### Student No: L00177804
