@@ -79,5 +79,24 @@ jobs:
         - run: dotnet restore
           name: Build
         - run: dotnet build --no-restore
-
-
+        
+  test-sqlite:
+      needs: [build-web-app]
+      name: Test SQLite Database
+      runs-on: ${{ matrix.os }}
+      strategy:
+        matrix:
+          os: [windows-latest]
+      steps:
+        - uses: actions/checkout@v3
+        - name: Cache .NET packages
+          uses: actions/cache@v3.2.6
+          # ... cache settings
+        
+        - uses: actions/setup-dotnet@v3
+          with:
+            dotnet-version: ${{ matrix.dotnet-version }}
+          name: Restore
+        - run: dotnet restore
+          name: Test
+        - run: dotnet test
