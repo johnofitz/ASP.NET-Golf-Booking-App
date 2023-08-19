@@ -1,20 +1,17 @@
-
 name: .NET
 
-# Define the events that trigger the Github Actions workflow
 on:
   push:
     branches:
-      - master # Only trigger the workflow on the master branch
+      - master
     paths-ignore:
-      - '**/*.md' # Ignore markdown files
-      - '**/*.git*' # Ignore git files
+      - '**/*.md'
+      - '**/*.git*'
   pull_request:
     branches:
-      - master # Only trigger the workflow on the master branch
+      - master
   workflow_dispatch:
 
-# Define the environment variables to be used in the Github Actions workflow
 env:
   DOTNET_NOLOGO: true
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
@@ -22,8 +19,6 @@ env:
 
 jobs:
 
-
-     # Setup job to install .NET and MAUI workload
   setup:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -32,71 +27,87 @@ jobs:
         dotnet-version: [7.0.x]
 
     steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
 
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 7.0.x
-
-    # Cache NuGet packages and the .NET SDK for faster builds
-    - name: Cache .NET packages
-      uses: actions/cache@v3.2.6
-      with:
-        path: '~/.nuget/packages'
-        key: ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-packages-${{ hashFiles('**/*.csproj') }}
-        restore-keys: |
-          ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-packages-
-          ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-
-          ${{ runner.os }}-dotnet-
+      - name: Cache .NET packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-packages-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-packages-
+            ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-
+            ${{ runner.os }}-dotnet-
 
   build-web-app:
-    # Define the jobs that this job depends on
-    needs: [setup]
+    needs: setup
     name: Build Web App
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [windows-latest]
+
     steps:
-        - uses: actions/checkout@v3
-        
-        # Cache NuGet packages and the .NET SDK for faster builds
-        - name: Cache .NET packages
-          uses: actions/cache@v3.2.6
-          with:
-            path: '~/.nuget/packages'
-            key: ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-packages-${{ hashFiles('**/*.csproj') }}
-            restore-keys: |
-              ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-packages-
-              ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-
-              ${{ runner.os }}-dotnet-
-        
-        - uses: actions/setup-dotnet@v3
-          with:
-            dotnet-version: ${{ matrix.dotnet-version }}
-          name: Restore
-        - run: dotnet restore
-          name: Build
-        - run: dotnet build --no-restore
-        
-  test-sqlite:
-      needs: [build-web-app]
-      name: Test SQLite Database
-      runs-on: ${{ matrix.os }}
-      strategy:
-        matrix:
-          os: [windows-latest]
-      steps:
-        - uses: actions/checkout@v3
-        - name: Cache .NET packages
-          uses: actions/cache@v3.2.6
-          # ... cache settings
-        
-        - uses: actions/setup-dotnet@v3
-          with:
-            dotnet-version: ${{ matrix.dotnet-version }}
-          name: Restore
-        - run: dotnet restore
-          name: Test
-        - run: dotnet test
+      - uses: actions/checkout@v3
+
+      - name: Cache .NET packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-packages-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-packages-
+            ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-
+            ${{ runner.os }}-dotnet-
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Restore
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+
+  test:
+    needs: build-web-app
+    name: Test SQLite Database and Code
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache .NET packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-packages-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-packages-
+            ${{ runner.os }}-dotnet-${{ matrix.dotnet-version }}-
+            ${{ runner.os }}-dotnet-
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Restore
+        run: dotnet restore
+      - name: Test
+        run: dotnet test
+
+  deploy:
+    needs: [build-web-app, test]
+    if: ${{ needs.test.result == 'success' }}
+    name: Deploy App
+    runs-on: windows-latest
+
+    steps:
+      - name: Deploy Web App
+        run: echo "Deploy in progress"
