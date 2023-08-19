@@ -75,4 +75,4 @@ jobs:
         - uses: actions/setup-dotnet@v3
           with:
             dotnet-version: ${{ matrix.dotnet-version }}
-        - run: dotnet build --no-restore
+        - run: dotnet build
