@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  'mypool'
+  name: MyPool
 
 variables:
   solution: '**/*.sln'
